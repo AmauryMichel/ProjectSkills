@@ -21,7 +21,7 @@
             android:layout_marginRight="158dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
-            android:onClick="onCancel"/>
+            android:onClick="close"/>
 
     <Button
             android:text="@string/register"

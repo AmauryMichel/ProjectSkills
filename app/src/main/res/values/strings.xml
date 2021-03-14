@@ -2,9 +2,12 @@
     <string name="app_name">Project Skills</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="enter_user">Enter username...</string>
-    <string name="enter_pass">Enter password...</string>
+    <string name="enter_user">Enter username…</string>
+    <string name="enter_pass">Enter password…</string>
     <string name="manager">Manager</string>
     <string name="player">Player</string>
     <string name="cancel_reg">Cancel, Go Back to Login</string>
+    <string name="drill_description">Drill description</string>
+    <string name="drill_name">Drill name</string>
+    <string name="drill_group_name">Drill Group Name</string>
 </resources>

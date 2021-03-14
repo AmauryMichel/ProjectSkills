@@ -1,21 +1,21 @@
 package com.example.projectskills;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText usernameET, passwordET;
+    private EditText usernameET, passwordET;
 
-    RadioButton player, manager;
+    private RadioButton player;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -23,27 +23,25 @@ public class RegisterActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.newPassword);
 
         player = findViewById((R.id.radioPlayer));
-        manager = findViewById((R.id.radioManager));
     }
 
-    public void onCancel(View view)
-    {
-        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivity(intent);
+    public void close(View view) {
+        finish();
     }
 
-    public void onRegister(View view)
-    {
+    public void onRegister(View view) {
         String username = usernameET.getText().toString();
         String password = passwordET.getText().toString();
         String accType = "";
 
-        if(player.isChecked())
-        {
-            accType = "player";
+        if (username.equals("") || password.equals("")) { // Check if the
+            Toast.makeText(this, "You must enter both your username and your password", Toast.LENGTH_SHORT).show();
+            return;
         }
-        else if(manager.isChecked())
-        {
+
+        if (player.isChecked()) {
+            accType = "player";
+        } else { // It's either player or manager
             accType = "manager";
         }
 
