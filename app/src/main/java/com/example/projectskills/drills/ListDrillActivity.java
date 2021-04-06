@@ -20,12 +20,13 @@ public class ListDrillActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        // Placeholder to test how they display
         JSONObject test = new JSONObject();
         try {
             test.put("drillId", 1);
-            test.put("drillName","test");
-            test.put("drillDesc","test2");
-            test.put("groupName","test3");
+            test.put("drillName","Activity name");
+            test.put("drillDesc","Activity description");
+            test.put("groupName","Group name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -68,8 +69,6 @@ public class ListDrillActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_list_drill);
         RecyclerView rvDrill = findViewById(R.id.rvDrills);
-
-        Log.d("MyApp", String.valueOf(listDrill.size()));
 
         DrillAdapter adapter = new DrillAdapter(listDrill);
         rvDrill.setAdapter(adapter);

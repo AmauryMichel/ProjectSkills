@@ -8,21 +8,23 @@
         android:gravity="center"
 >
     <TextView
+            android:text="Welcome, please log in or register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome User"
     />
     <Button
-            android:text="View your groups"
+            android:text="Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/viewGroups"
+            android:id="@+id/login"
+            android:onClick="toLogin"
     />
     <Button
-            android:text="Create a group"
+            android:text="Register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/createGroup"
+            android:id="@+id/register"
+            android:onClick="toRegister"
     />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,129 +1,89 @@
 package com.example.projectskills;
 
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
-public class DBConnect extends AsyncTask<String, Void, String> {
-    @SuppressLint("StaticFieldLeak")
-    Context context;
-    AlertDialog alertDialog;
+public class DBConnect {
+    // Set of static strings so that if there is a change in the link, you can simply edit it here instead of everywhere
+    public static String addressBase = "http://10.0.2.2/project/";
+    public static String addressLogin = "DB_LOGIN.php";
+    public static String addressRegister = "DB_REG.php";
 
-    DBConnect(Context context) {
-        this.context = context;
-    }
 
-    @Override
-    protected String doInBackground(String... params) {
+    protected static String login(String username, String pass){
+        String login_url = addressBase + addressLogin;
+        StringBuilder result = new StringBuilder();
 
-        String type = params[0];
+        try {
+            URL url = new URL(login_url);
+            // Connect to the URL
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            // Set the data to be sent to the URL
+            String postData = URLEncoder.encode("login", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8")
+                    + "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+            bufferedWriter.write(postData); // Write the data
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            // Read the data returned from the URL
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
 
-        if (type.equals("login")) {
-            String login_url = "http://127.0.0.1/PHP_SCRIPTS/DB_LOGIN.php";
-
-            try {
-                String user_name = params[1];
-                String pass_word = params[2];
-
-                URL url = new URL(login_url);
-                HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
-                httpConnection.setRequestMethod("POST");
-                httpConnection.setDoOutput(true);
-                httpConnection.setDoInput(true);
-                OutputStream outputStream = httpConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8")
-                        + "&" + URLEncoder.encode("pass_word", "UTF-8") + "=" + URLEncoder.encode(pass_word, "UTF-8");
-                bufferedWriter.write(postData);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                StringBuilder result = new StringBuilder();
-                String line = "";
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    result.append(line);
-                }
-
-                bufferedReader.close();
-                inputStream.close();
-                httpConnection.disconnect();
-
-                return result.toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            while ((line = bufferedReader.readLine()) != null) { // Get all of the lines
+                result.append(line);
             }
-        } else if (type.equals("register")) {
-            String login_url = "http://10.0.2.2/dashboard/DB_REG.php";
 
-            try {
-                String user_name = params[1];
-                String pass_word = params[2];
-                String acc_type = params[3];
-
-                URL url = new URL(login_url);
-                HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
-                httpConnection.setRequestMethod("POST");
-                httpConnection.setDoOutput(true);
-                httpConnection.setDoInput(true);
-                OutputStream outputStream = httpConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String postData = URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8")
-                        + "&" + URLEncoder.encode("pass_word", "UTF-8") + "=" + URLEncoder.encode(pass_word, "UTF-8")
-                        + "&" + URLEncoder.encode("acc_type", "UTF-8") + "=" + URLEncoder.encode(acc_type, "UTF-8");
-                bufferedWriter.write(postData);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                String result = "", line = "";
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    result += line;
-                }
-
-                bufferedReader.close();
-                inputStream.close();
-                httpConnection.disconnect();
-
-                return result;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return null;
+        return result.toString();
     }
 
-    @Override
-    protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login/Register Status.");
-    }
+    // register() functions the same as login()
+    protected static String register(String username, String pass){
+        String register_url = addressBase + addressRegister;
+        StringBuilder result = new StringBuilder();
 
-    @Override
-    protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
-    }
+        try {
+            URL url = new URL(register_url);
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            String postData = URLEncoder.encode("login", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8")
+                    + "&" + URLEncoder.encode("pass", "UTF-8") + "=" + URLEncoder.encode(pass, "UTF-8");
+            bufferedWriter.write(postData);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
 
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
+            while ((line = bufferedReader.readLine()) != null) {
+                result.append(line);
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 }
