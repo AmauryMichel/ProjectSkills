@@ -2,12 +2,13 @@ package com.example.projectskills;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.example.projectskills.group.CreateGroup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public static boolean isLoggedIn = false;
     public static String username;
+    public static String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (isLoggedIn){ //Check if the user is already logged in
             setContentView(R.layout.activity_main);
+            TextView tvWelcome = findViewById(R.id.welcome);
+            tvWelcome.setText("Welcome " + username);
         } else {
             setContentView(R.layout.activity_logged_out);
         }
@@ -39,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    public void toCreateGroup(View v) {
+        Intent intent = new Intent(this, CreateGroup.class);
+        startActivity(intent);
+    }
+
     @Override
     // Get the result from the activity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             isLoggedIn = true;
             assert data != null;
             username = data.getStringExtra("username"); // Store the username
+            userID = (data.getStringExtra("userID"));
             // Restart the activity to have the correct layout
             finish();
             startActivity(getIntent());

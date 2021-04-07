@@ -8,21 +8,29 @@
         android:gravity="center"
 >
     <TextView
+            android:id="@+id/welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome User"
+            android:text="@string/welcome"
     />
     <Button
-            android:text="View your groups"
+            android:text="@string/view_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/viewGroups"
     />
     <Button
-            android:text="Create a group"
+            android:text="@string/create_a_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/createGroup"
+            android:onClick="toCreateGroup"
+    />
+    <Button
+            android:text="@string/create_drill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/createDrill"
     />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

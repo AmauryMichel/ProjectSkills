@@ -6,8 +6,14 @@
     <string name="enter_pass">Enter password…</string>
     <string name="manager">Manager</string>
     <string name="player">Player</string>
-    <string name="cancel_reg">REturn</string>
+    <string name="cancel_reg">Return</string>
     <string name="drill_description">Drill description</string>
     <string name="drill_name">Drill name</string>
     <string name="drill_group_name">Drill Group Name</string>
+    <string name="enter_group_name">Enter group name</string>
+    <string name="welcome">Welcome User</string>
+    <string name="view_groups">View your groups</string>
+    <string name="create_a_group">Create a group</string>
+    <string name="create_drill">Create a drill</string>
+    <string name="create_group">Create group</string>
 </resources>

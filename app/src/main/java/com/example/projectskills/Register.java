@@ -42,10 +42,11 @@ public class Register extends AppCompatActivity {
         Thread thr = new Thread(r);
         thr.start();
         thr.join();
-        if (result[0].equals("Success")) { // Check the string
+        if (result[0].startsWith("Success")) { // Check the string
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
             Intent returnIntent = new Intent();
             returnIntent.putExtra("username", username);
+            returnIntent.putExtra("userID", result[0].substring(7)); // Get the ID
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
         } else { // If it wasn't successful, display the error message

@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import java.util.Vector;
 
-public class ListDrillActivity extends AppCompatActivity {
+public class ListDrill extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
