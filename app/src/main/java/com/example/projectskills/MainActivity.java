@@ -2,13 +2,13 @@ package com.example.projectskills;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.example.projectskills.group.CreateGroup;
+import com.example.projectskills.group.ListGroup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (isLoggedIn){ //Check if the user is already logged in
+        if (isLoggedIn) { //Check if the user is already logged in
             setContentView(R.layout.activity_main);
             TextView tvWelcome = findViewById(R.id.welcome);
             tvWelcome.setText("Welcome " + username);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void toLogin(View v){ // Create a Login activity
+    public void toLogin(View v) { // Create a Login activity
         Intent intent = new Intent(this, Login.class);
         startActivityForResult(intent, 1);
     }
@@ -48,11 +48,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toListGroup(View v) {
+        Intent intent = new Intent(this, ListGroup.class);
+        startActivity(intent);
+    }
+
     @Override
     // Get the result from the activity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK){ //If the result is RESULT_OK, the registration or log in was successful
+        if (resultCode == Activity.RESULT_OK) { //If the result is RESULT_OK, the registration or log in was successful
             isLoggedIn = true;
             assert data != null;
             username = data.getStringExtra("username"); // Store the username

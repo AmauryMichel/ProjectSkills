@@ -73,9 +73,21 @@ class db {
     $stmt->execute();
     $result = $stmt->get_result(); // get the mysqli result
   }
+
+  function getGroups($userID) {
+    $stmt = $this->conn->prepare("SELECT * FROM thegroup NATURAL JOIN player_group WHERE player_id = ?");
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result(); // get the mysqli result
+    $output = [];
+    while ($data = mysqli_fetch_array($result)){
+      $output[] = $data;
+    }
+    print(json_encode($output));
+  }
   //</editor-fold>
 
-  //<editor-fold desc="Add functions">
+  //<editor-fold desc="Create functions">
   function createGroup($managerID, $groupName) {
     // Create the group
     $stmtGroup = $this->conn->prepare("INSERT INTO thegroup (group_name) VALUES (?)");

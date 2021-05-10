@@ -39,7 +39,9 @@ public class CreateGroup extends AppCompatActivity {
             @Override
             public void run() {
                 result[0] = DBConnect.createGroup(groupName); // Store the result in the array
-            };
+            }
+
+            ;
         };
 
         Thread thr = new Thread(r);

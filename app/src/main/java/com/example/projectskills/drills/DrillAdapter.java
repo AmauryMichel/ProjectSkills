@@ -57,7 +57,7 @@ public class DrillAdapter extends RecyclerView.Adapter<DrillAdapter.ViewHolder> 
         return lDrills.size();
     }
 
-    private Vector<Drill> lDrills;
+    private final Vector<Drill> lDrills;
 
     public DrillAdapter(Vector<Drill> lDrills) {
         this.lDrills = lDrills;
