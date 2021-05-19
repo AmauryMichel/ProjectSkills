@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 10, 2021 at 11:24 AM
+-- Generation Time: May 19, 2021 at 08:20 PM
 -- Server version: 8.0.23
 -- PHP Version: 7.3.12
 
@@ -75,17 +75,17 @@ CREATE TABLE IF NOT EXISTS `group_drill` (
 
 DROP TABLE IF EXISTS `player`;
 CREATE TABLE IF NOT EXISTS `player` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `player_id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
   `pass` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`player_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `player`
 --
 
-INSERT INTO `player` (`id`, `username`, `pass`) VALUES
+INSERT INTO `player` (`player_id`, `username`, `pass`) VALUES
 (14, 'testaa', '$2y$10$oszWGtIU1qc1sZ5krCcXU.ev75LxkzLLLL/6EqrtPQu9kdhbxZJdG'),
 (19, 'test3', '$2y$10$S3YOQ8mm2lK72DU9R71VqOmvXDCiWwtkN6WzK4lBptaDj37EB0VBW'),
 (21, 'test', '$2y$10$pxZKXvpf/xhrve6E1GT9T.SMJigRomsiPyHhrvIoNz6ynpQxXM7wW'),
@@ -118,8 +118,15 @@ CREATE TABLE IF NOT EXISTS `player_group` (
 --
 
 INSERT INTO `player_group` (`player_id`, `group_id`, `is_manager`) VALUES
+(14, 13, 0),
+(14, 14, 0),
+(19, 13, 0),
+(25, 13, 0),
+(27, 13, 1),
 (28, 12, 1),
-(28, 13, 0);
+(28, 13, 0),
+(28, 14, 1),
+(28, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -132,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `thegroup` (
   `group_id` int NOT NULL AUTO_INCREMENT,
   `group_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `thegroup`
@@ -140,7 +147,9 @@ CREATE TABLE IF NOT EXISTS `thegroup` (
 
 INSERT INTO `thegroup` (`group_id`, `group_name`) VALUES
 (12, 'test'),
-(13, 'new group');
+(13, 'new group'),
+(14, 'new'),
+(17, 'aaaaaa');
 
 --
 -- Constraints for dumped tables
@@ -150,14 +159,14 @@ INSERT INTO `thegroup` (`group_id`, `group_name`) VALUES
 -- Constraints for table `drill`
 --
 ALTER TABLE `drill`
-  ADD CONSTRAINT `FK_D_M` FOREIGN KEY (`man_id`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_D_M` FOREIGN KEY (`man_id`) REFERENCES `player` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `drill_player`
 --
 ALTER TABLE `drill_player`
   ADD CONSTRAINT `FK_DP_D` FOREIGN KEY (`drill_id`) REFERENCES `drill` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_DP_P` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_DP_P` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `group_drill`
@@ -171,7 +180,7 @@ ALTER TABLE `group_drill`
 --
 ALTER TABLE `player_group`
   ADD CONSTRAINT `FK_MG_G` FOREIGN KEY (`group_id`) REFERENCES `thegroup` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_MG_M` FOREIGN KEY (`player_id`) REFERENCES `player` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_MG_M` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

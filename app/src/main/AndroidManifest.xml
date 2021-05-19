@@ -25,6 +25,8 @@
         <activity android:name=".Login"/>
 
         <activity android:name=".group.ListGroup"/>
+        <activity android:name=".group.GroupActivity"/>
+        <activity android:name=".group.NewMember"/>
 
         <activity android:name=".group.CreateGroup"/>
     </application>

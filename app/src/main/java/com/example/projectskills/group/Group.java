@@ -1,6 +1,8 @@
 package com.example.projectskills.group;
 
-public class Group {
+import java.io.Serializable;
+
+public class Group implements Serializable {
     int groupID;
     String groupName;
     boolean groupManager;

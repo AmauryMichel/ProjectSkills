@@ -30,7 +30,7 @@ class db {
 
     if (password_verify($pass, $data['pass'])) { //check if the password is correct
       print("Success");
-      print($data['id']);
+      print($data['player_id']);
     } else {
       print("Wrong password");
     }
@@ -85,6 +85,32 @@ class db {
     }
     print(json_encode($output));
   }
+
+  function getUsersNotInGroup($groupID) {
+    //Get all users who aren't already in the group
+    $stmt = $this->conn->prepare("SELECT * FROM player WHERE player_id NOT IN (SELECT player_id FROM player_group WHERE group_id = ?)");
+    $stmt->bind_param("i", $groupID);
+    $stmt->execute();
+
+    $result = $stmt->get_result(); // get the mysqli result
+    $output = [];
+    while ($data = mysqli_fetch_array($result)){
+      $output[] = $data;
+    }
+    print(json_encode($output));
+  }
+
+  function getUsersGroup($groupID) {
+    $stmt = $this->conn->prepare("SELECT * FROM player_group NATURAL JOIN player WHERE group_id = ?");
+    $stmt->bind_param("i", $groupID);
+    $stmt->execute();
+    $result = $stmt->get_result(); // get the mysqli result
+    $output = [];
+    while ($data = mysqli_fetch_array($result)){
+      $output[] = $data;
+    }
+    print(json_encode($output));
+  }
   //</editor-fold>
 
   //<editor-fold desc="Create functions">
@@ -100,6 +126,14 @@ class db {
     $stmtPlayerGroup = $this->conn->prepare("INSERT INTO player_group (player_id, group_id, is_manager) VALUES (?, ?, 1)");
     $stmtPlayerGroup->bind_param("ii", $managerID, $groupID);
     $stmtPlayerGroup->execute();
+    print("Success");
+  }
+
+  function addMember($userID, $groupID) {
+    $stmtPlayerGroup = $this->conn->prepare("INSERT INTO player_group (player_id, group_id, is_manager) VALUES (?, ?, 0)");
+    $stmtPlayerGroup->bind_param("ii", $userID, $groupID);
+    $stmtPlayerGroup->execute();
+    print($stmtPlayerGroup->error);
     print("Success");
   }
 

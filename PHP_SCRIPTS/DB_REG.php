@@ -12,5 +12,3 @@ if (!isset($_POST['login'])) {
 } else {
   $db->register($_POST['login'], password_hash($_POST['pass'], PASSWORD_DEFAULT));
 }
-
-?>

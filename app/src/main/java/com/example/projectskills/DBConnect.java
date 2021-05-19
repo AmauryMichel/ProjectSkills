@@ -13,11 +13,14 @@ import java.nio.charset.StandardCharsets;
 
 public class DBConnect {
     // Set of static strings so that if there is a change in the link, you can simply edit it here instead of everywhere
-    public static String addressBase = "http://10.0.2.2/project/";
+    public static String addressBase = "http://10.0.2.2/PHP_SCRIPTS/";
     public static String addressLogin = "DB_LOGIN.php";
     public static String addressRegister = "DB_REG.php";
 
     public static String addressGetGroups = "DB_GET_GROUPS.php";
+    public static String addressGetUsersGroup = "DB_GET_USERS_GROUP.php";
+    public static String addressGetUsersNotGroup = "DB_GET_USERS_NOT_GROUP.php";
+    public static String addressAddMember = "DB_ADD_MEMBER.php";
 
     public static String addressCrGroup = "DB_CR_GROUP.php";
 
@@ -121,7 +124,6 @@ public class DBConnect {
 
             if ((line = bufferedReader.readLine()) != null) { // Get all of the lines
                 result = new JSONArray(line);
-                Log.d("MyApp", line);
             }
 
             bufferedReader.close();
@@ -131,6 +133,118 @@ public class DBConnect {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static JSONArray getUsersGroup(String groupID) {
+        String login_url = addressBase + addressGetUsersGroup;
+        JSONArray result = new JSONArray();
+
+        try {
+            URL url = new URL(login_url);
+            // Connect to the URL
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            // Set the data to be sent to the URL
+            String postData = URLEncoder.encode("groupID", "UTF-8") + "=" + URLEncoder.encode(groupID, "UTF-8");
+            bufferedWriter.write(postData); // Write the data
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            // Read the data returned from the URL
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
+
+            if ((line = bufferedReader.readLine()) != null) { // Get all of the lines
+                result = new JSONArray(line);
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static JSONArray getUsersNotGroup(String groupID) {
+        String login_url = addressBase + addressGetUsersNotGroup;
+        JSONArray result = new JSONArray();
+
+        try {
+            URL url = new URL(login_url);
+            // Connect to the URL
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            // Set the data to be sent to the URL
+            String postData = URLEncoder.encode("groupID", "UTF-8") + "=" + URLEncoder.encode(groupID, "UTF-8");
+            bufferedWriter.write(postData); // Write the data
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            // Read the data returned from the URL
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
+
+            if ((line = bufferedReader.readLine()) != null) { // Get all of the lines
+                result = new JSONArray(line);
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static String addMember(String userID, String groupID) {
+        String login_url = addressBase + addressAddMember;
+        StringBuilder result = new StringBuilder();
+
+        try {
+            URL url = new URL(login_url);
+            // Connect to the URL
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            // Set the data to be sent to the URL
+            String postData = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8")
+                    + "&" + URLEncoder.encode("groupID", "UTF-8") + "=" + URLEncoder.encode(groupID, "UTF-8");
+            bufferedWriter.write(postData); // Write the data
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            // Read the data returned from the URL
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
+
+            while ((line = bufferedReader.readLine()) != null) { // Get all of the lines
+                result.append(line);
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 
     public static String createGroup(String groupName) {

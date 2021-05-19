@@ -1,7 +1,9 @@
 package com.example.projectskills.group;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,29 +21,24 @@ public class ListGroup extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        final Vector<Group> listGroup = new Vector<Group>();
+        final Vector<Group> listGroup = new Vector<>();
 
         super.onCreate(savedInstanceState);
 
-        Log.d("MyApp", "toListGroup");
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                Log.d("MyApp", "run");
                 JSONArray jsaGroup = DBConnect.getGroups(userID); // Store the result in the array
                 JSONObject jso = new JSONObject();
                 Group group = null;
-                Vector<Group> tempListGroup = new Vector<Group>();
 
                 for (int i = 0; i < jsaGroup.length(); i++) {
-                    Log.d("MyApp", "creating groups");
                     try {
                         jso = jsaGroup.getJSONObject(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     try {
-                        Log.d("MyApp", "group create");
                         assert jso != null;
                         group = new Group(
                                 jso.getInt("group_id"),

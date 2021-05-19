@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project Skills</string>
+    <string name="app_name">Dojo Sports Management</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="enter_user">Enter username…</string>
@@ -18,4 +18,6 @@
     <string name="create_group">Create group</string>
     <string name="group_name">Group name</string>
     <string name="tvGroupManager">Your are manager of this group</string>
+    <string name="members_group">Members in this group</string>
+    <string name="add_member">Add a player to the group</string>
 </resources>

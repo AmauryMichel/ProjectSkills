@@ -5,12 +5,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="start"
-        android:id="@+id/modelListDrill"
+        android:id="@+id/modelListGroup"
 >
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="60dp"
-                  android:orientation="horizontal"
-    >
 <!--        <ImageView-->
 <!--                android:layout_width="160dp"-->
 <!--                android:layout_height="match_parent"-->
@@ -20,6 +16,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:id="@+id/llListGroup"
+                android:paddingBottom="20dp"
+                android:onClick="toGroupDetail"
         >
             <TextView
                     android:layout_width="match_parent"
@@ -38,9 +37,4 @@
                     android:id="@+id/tvGroupAdmin"
             />
         </LinearLayout>
-    </LinearLayout>
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
 </LinearLayout>

@@ -13,4 +13,4 @@ if (!isset($_POST['login'])) {
     $db->login($_POST['login'], $_POST['pass']);
 }
 
-?>
+

@@ -7,8 +7,10 @@ $co = $db->getConnection();
 
 if (!isset($_POST['userID'])) {
     print("No user ID");
+} elseif (!isset($_POST['groupID'])) {
+    print("No group ID");
 } else {
-    $db->getGroups($_POST['userID']);
+    $db->addMember($_POST['userID'], $_POST['groupID']);
 }
 
 
