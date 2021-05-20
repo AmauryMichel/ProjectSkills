@@ -141,6 +141,8 @@ class db {
     $stmt = $this->conn->prepare("INSERT INTO drill (man_id, drill_name, drill_desc) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $managerID, $drillName, $drillDesc);
     $stmt->execute();
+    print($stmt->error);
+    print("Success");
   }
   //</editor-fold>
 }
