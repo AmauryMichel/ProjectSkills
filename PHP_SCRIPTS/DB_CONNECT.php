@@ -2,7 +2,7 @@
 class db {
   private $host = "localhost";
   private $dbUser = "root";
-  private $dbPass = "root";
+  private $dbPass = "";
   private $dbName = "project";
   private $conn;
 
@@ -123,7 +123,7 @@ class db {
     $groupID = $this->conn->insert_id; // Get the ID of the newly created group
 
     // Add the user as a manager in that group
-    $stmtPlayerGroup = $this->conn->prepare("INSERT INTO player_group (player_id, group_id, is_manager) VALUES (?, ?, 1)");
+    $stmtPlayerGroup = $this->conn-php>prepare("INSERT INTO player_group (player_id, group_id, is_manager) VALUES (?, ?, 1)");
     $stmtPlayerGroup->bind_param("ii", $managerID, $groupID);
     $stmtPlayerGroup->execute();
     print("Success");
@@ -137,9 +137,9 @@ class db {
     print("Success");
   }
 
-  function createDrill($managerID, $drillName) {
-    $stmt = $this->conn->prepare("INSERT INTO drill (man_id, drill_name) VALUES (?, ?)");
-    $stmt->bind_param("is", $managerID, $drillName);
+  function createDrill($managerID, $drillName, $drillDesc) {
+    $stmt = $this->conn->prepare("INSERT INTO drill (man_id, drill_name, drill_desc) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $managerID, $drillName, $drillDesc);
     $stmt->execute();
   }
   //</editor-fold>

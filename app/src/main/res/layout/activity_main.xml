@@ -27,11 +27,12 @@
             android:id="@+id/createGroup"
             android:onClick="toCreateGroup"
     />
+
     <Button
             android:text="@string/create_drill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/createDrill"
-    />
+            android:onClick="toCreateDrill"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

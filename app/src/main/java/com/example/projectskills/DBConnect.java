@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 public class DBConnect {
     // Set of static strings so that if there is a change in the link, you can simply edit it here instead of everywhere
-    public static String addressBase = "http://10.0.2.2/PHP_SCRIPTS/";
+    public static String addressBase = "http://10.0.2.2/PHP-SCRIPTS/";
     public static String addressLogin = "DB_LOGIN.php";
     public static String addressRegister = "DB_REG.php";
 
@@ -23,6 +23,7 @@ public class DBConnect {
     public static String addressAddMember = "DB_ADD_MEMBER.php";
 
     public static String addressCrGroup = "DB_CR_GROUP.php";
+    public static String addressCrDrill = "DB_CR_DRILL.php";
 
 
     public static String login(String username, String pass) {
@@ -276,6 +277,44 @@ public class DBConnect {
                 result.append(line);
             }
 
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
+
+    public static String createDrill(String drillName, String drillDesc){
+        String login_url = addressBase + addressCrDrill;
+        StringBuilder result = new StringBuilder();
+
+        try {
+            URL url = new URL(login_url);
+            // Connect to the URL
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            // Data again...
+            String postData = URLEncoder.encode("managerID", "UTF-8") + "=" + URLEncoder.encode(MainActivity.userID, "UTF-8")
+                    + "&" + URLEncoder.encode("drillName", "UTF-8") + "=" + URLEncoder.encode(drillName, "UTF-8")
+                    + "&" + URLEncoder.encode("drillDesc", "UTF-8") + "=" + URLEncoder.encode(drillDesc, "UTF-8");
+            bufferedWriter.write(postData); // Write the data
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            // Read the data returned from the URL
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
+
+            while ((line = bufferedReader.readLine()) != null) { // Get all of the lines
+                result.append(line);
+            }
             bufferedReader.close();
             inputStream.close();
             httpConnection.disconnect();
