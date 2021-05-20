@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.projectskills.drills.CreateDrill;
+import com.example.projectskills.drills.Drill;
 import com.example.projectskills.group.CreateGroup;
 import com.example.projectskills.group.ListGroup;
+import com.example.projectskills.drills.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void toListGroup(View v) {
         Intent intent = new Intent(this, ListGroup.class);
+        startActivity(intent);
+    }
+
+    public void toCreateDrill(View v){
+        Intent intent = new Intent(this, CreateDrill.class);
         startActivity(intent);
     }
 

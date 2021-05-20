@@ -14,7 +14,7 @@
     <string name="welcome">Welcome User</string>
     <string name="view_groups">View your groups</string>
     <string name="create_a_group">Create a group</string>
-    <string name="create_drill">Create a drill</string>
+    <string name="create_drill">Create drill</string>
     <string name="create_group">Create group</string>
     <string name="group_name">Group name</string>
     <string name="tvGroupManager">Your are manager of this group</string>
