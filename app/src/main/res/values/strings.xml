@@ -17,7 +17,7 @@
     <string name="create_drill">Create a drill</string>
     <string name="create_group">Create group</string>
     <string name="group_name">Group name</string>
-    <string name="tvGroupManager">Your are manager of this group</string>
+    <string name="tvGroupManager">You are manager of this group</string>
     <string name="members_group">Members in this group</string>
     <string name="add_member">Add a player to the group</string>
 </resources>

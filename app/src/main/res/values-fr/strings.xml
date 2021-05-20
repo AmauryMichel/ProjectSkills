@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dojo Sports Management</string>
+    <string name="login">Connection</string>
+    <string name="register">Inscription</string>
+    <string name="enter_user">Entrez votre nom d\'utilisateur...</string>
+    <string name="enter_pass">Entrez votre mot de passe...</string>
+    <string name="manager">Manager</string>
+    <string name="player">Joueur</string>
+    <string name="cancel_reg">Retour</string>
+    <string name="drill_description">Description de l\'exercice</string>
+    <string name="drill_name">Nom de l\'exercice</string>
+    <string name="drill_group_name">Nom de l\'exercice Group</string>
+    <string name="enter_group_name">Entrez le nom du groupe</string>
+    <string name="welcome">Bienvenu Utilisateur</string>
+    <string name="view_groups">Voir vos groupes</string>
+    <string name="create_a_group">Créer un groupe</string>
+    <string name="create_drill">Créer un exercice</string>
+    <string name="create_group">Créer le groupe</string>
+    <string name="group_name">Nom du groupe</string>
+    <string name="tvGroupManager">Vous êtes le manager de ce groupe</string>
+    <string name="members_group">Membres dans ce groupe</string>
+    <string name="add_member">Ajouter un joueur dans ce groupe</string>
+</resources>
