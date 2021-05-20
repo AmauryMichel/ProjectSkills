@@ -2,7 +2,7 @@
 class db {
   private $host = "localhost";
   private $dbUser = "root";
-  private $dbPass = "";
+  private $dbPass = "root";
   private $dbName = "project";
   private $conn;
 
@@ -80,6 +80,19 @@ class db {
     $stmt->execute();
     $result = $stmt->get_result(); // get the mysqli result
     $output = [];
+    while ($data = mysqli_fetch_array($result)){
+      $output[] = $data;
+    }
+    print(json_encode($output));
+  }
+
+  function getDrills($userID) {
+    $stmt = $this->conn->prepare("SELECT * FROM drill WHERE man_id = ?");
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result(); // get the mysqli result
+    $output = [];
+    print($stmt->error);
     while ($data = mysqli_fetch_array($result)){
       $output[] = $data;
     }

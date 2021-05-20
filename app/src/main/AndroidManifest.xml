@@ -29,6 +29,7 @@
         <activity android:name=".group.NewMember"/>
 
         <activity android:name=".group.CreateGroup"/>
+        <activity android:name=".drills.ListDrill"/>
         <activity android:name=".drills.CreateDrill"/>
     </application>
 

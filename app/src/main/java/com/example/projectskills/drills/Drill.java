@@ -4,13 +4,11 @@ public class Drill {
     int drillId;
     String drillName;
     String drillDesc;
-    String drillGroupName;
 
-    public Drill(int drillId, String drillName, String drillDesc, String drillGroupName) {
+    public Drill(int drillId, String drillName, String drillDesc) {
         this.drillId = drillId;
         this.drillName = drillName;
         this.drillDesc = drillDesc;
-        this.drillGroupName = drillGroupName;
     }
 
     public int getDrillId() {
@@ -23,9 +21,5 @@ public class Drill {
 
     public String getDrillDesc() {
         return drillDesc;
-    }
-
-    public String getDrillGroupName() {
-        return drillGroupName;
     }
 }

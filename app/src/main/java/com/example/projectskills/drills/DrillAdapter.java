@@ -16,14 +16,12 @@ public class DrillAdapter extends RecyclerView.Adapter<DrillAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvDrillName;
         public TextView tvDrillDesc;
-        public TextView tvDrillGroup;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvDrillName = itemView.findViewById(R.id.tvDrillName);
             tvDrillDesc = itemView.findViewById(R.id.tvDrillDesc);
-            tvDrillGroup = itemView.findViewById(R.id.tvDrillGroup);
         }
     }
 
@@ -47,9 +45,6 @@ public class DrillAdapter extends RecyclerView.Adapter<DrillAdapter.ViewHolder> 
 
         TextView tvDesc = holder.tvDrillDesc;
         tvDesc.setText(drill.getDrillDesc());
-
-        TextView tvGroup = holder.tvDrillGroup;
-        tvGroup.setText(drill.getDrillGroupName());
     }
 
     @Override

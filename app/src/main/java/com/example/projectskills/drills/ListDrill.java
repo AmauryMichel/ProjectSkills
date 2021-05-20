@@ -39,10 +39,9 @@ public class ListDrill extends AppCompatActivity {
                     }
                     try {
                         assert jso != null;
-                        drill = new Drill(jso.getInt("drillId"),
-                                jso.getString("drillName"),
-                                jso.getString("drillDesc"),
-                                jso.getString("groupName"));
+                        drill = new Drill(jso.getInt("id"),
+                                jso.getString("drill_name"),
+                                jso.getString("drill_desc"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
