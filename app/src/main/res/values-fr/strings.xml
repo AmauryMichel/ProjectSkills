@@ -12,7 +12,7 @@
     <string name="drill_name">Nom de l\'exercice</string>
     <string name="drill_group_name">Nom de l\'exercice Group</string>
     <string name="enter_group_name">Entrez le nom du groupe</string>
-    <string name="welcome">Bienvenu Utilisateur</string>
+    <string name="welcome">Bienvenue Utilisateur</string>
     <string name="view_groups">Voir vos groupes</string>
     <string name="create_a_group">Créer un groupe</string>
     <string name="create_drill">Créer un exercice</string>
@@ -21,4 +21,5 @@
     <string name="tvGroupManager">Vous êtes le manager de ce groupe</string>
     <string name="members_group">Membres dans ce groupe</string>
     <string name="add_member">Ajouter un joueur dans ce groupe</string>
+    <string name="welcomeLoggedOut">Bienvenue, veuillez vous connecter ou créer un compte</string>
 </resources>
