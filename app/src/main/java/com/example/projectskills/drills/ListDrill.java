@@ -5,66 +5,58 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.projectskills.DBConnect;
 import com.example.projectskills.R;
+import com.example.projectskills.group.Group;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Vector;
 
+import static com.example.projectskills.MainActivity.userID;
+
 public class ListDrill extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Vector<Drill> listDrill = new Vector<Drill>();
+        final Vector<Drill> listDrill = new Vector<Drill>();
 
         super.onCreate(savedInstanceState);
 
-        // Placeholder to test how they display
-        JSONObject test = new JSONObject();
-        try {
-            test.put("drillId", 1);
-            test.put("drillName","Activity name");
-            test.put("drillDesc","Activity description");
-            test.put("groupName","Group name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JSONObject test2 = new JSONObject();
-        try {
-            test2.put("drillId", 2);
-            test2.put("drillName","test1");
-            test2.put("drillDesc","test12");
-            test2.put("groupName","test13");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JSONObject test3 = test2;
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                JSONArray jsaGroup = DBConnect.getDrills(userID); // Store the result in the array
+                JSONObject jso = new JSONObject();
+                Drill drill = null;
 
-        JSONArray jsaDrills = new JSONArray();
-        jsaDrills.put(test);
-        jsaDrills.put(test2);
-        jsaDrills.put(test3);
-        JSONObject jso = new JSONObject();
-        Drill dri = null;
-        for (int i = 0; i < jsaDrills.length(); i++) {
-            try {
-                jso = jsaDrills.getJSONObject(i);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                for (int i = 0; i < jsaGroup.length(); i++) {
+                    try {
+                        jso = jsaGroup.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        assert jso != null;
+                        drill = new Drill(jso.getInt("drillId"),
+                                jso.getString("drillName"),
+                                jso.getString("drillDesc"),
+                                jso.getString("groupName"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    listDrill.add(drill);
+                }
             }
-            try {
-                Log.d("MyApp", "drill create");
-                assert jso != null;
-                dri = new Drill(
-                        jso.getInt("drillId"),
-                        jso.getString("drillName"),
-                        jso.getString("drillDesc"),
-                        jso.getString("groupName"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            listDrill.add(dri);
+        };
+
+        Thread thr = new Thread(r);
+        thr.start();
+        try {
+            thr.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         setContentView(R.layout.activity_list_drill);

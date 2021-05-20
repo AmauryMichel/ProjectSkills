@@ -20,6 +20,7 @@
             android:id="@+id/viewGroups"
             android:onClick="toListGroup"
     />
+
     <Button
             android:text="@string/create_a_group"
             android:layout_width="wrap_content"
@@ -35,4 +36,11 @@
             android:id="@+id/createDrill"
             android:onClick="toCreateDrill"/>
 
+    <Button
+            android:text="@string/view_drill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewDrills"
+            android:onClick="toListDrill"
+    />
 </androidx.appcompat.widget.LinearLayoutCompat>

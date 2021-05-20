@@ -61,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toListDrill(View v) {
+        Intent intent = new Intent(this, ListDrill.class);
+        startActivity(intent);
+    }
+
     @Override
     // Get the result from the activity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

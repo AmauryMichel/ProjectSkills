@@ -24,7 +24,7 @@ public class DBConnect {
 
     public static String addressCrGroup = "DB_CR_GROUP.php";
     public static String addressCrDrill = "DB_CR_DRILL.php";
-
+    public static String addressGetDrills = "DB_GET_DRILLS.php";
 
     public static String login(String username, String pass) {
         String login_url = addressBase + addressLogin;
@@ -323,4 +323,42 @@ public class DBConnect {
         }
         return result.toString();
     }
+    public static JSONArray getDrills(String userID) {
+        String login_url = addressBase + addressGetDrills;
+        JSONArray result = new JSONArray();
+
+        try {
+            URL url = new URL(login_url);
+            // Connect to the URL
+            HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+            httpConnection.setRequestMethod("POST");
+            httpConnection.setDoOutput(true);
+            httpConnection.setDoInput(true);
+            OutputStream outputStream = httpConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+            // Set the data to be sent to the URL
+            String postData = URLEncoder.encode("userID", "UTF-8") + "=" + URLEncoder.encode(userID, "UTF-8");
+            bufferedWriter.write(postData); // Write the data
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            // Read the data returned from the URL
+            InputStream inputStream = httpConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+            String line = "";
+
+            if ((line = bufferedReader.readLine()) != null) { // Get all of the lines
+                result = new JSONArray(line);
+            }
+
+            bufferedReader.close();
+            inputStream.close();
+            httpConnection.disconnect();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }
+

@@ -20,4 +20,5 @@
     <string name="tvGroupManager">You are manager of this group</string>
     <string name="members_group">Members in this group</string>
     <string name="add_member">Add a player to the group</string>
+    <string name="view_drill">View your drills</string>
 </resources>
