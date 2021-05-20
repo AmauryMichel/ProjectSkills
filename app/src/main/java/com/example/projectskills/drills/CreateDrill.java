@@ -50,7 +50,7 @@ public class CreateDrill extends AppCompatActivity {
         thr.start();
         thr.join();
         if (result[0].equals("Success")) { // Check the string
-            Toast.makeText(this, "Group creation successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Drill creation successful", Toast.LENGTH_SHORT).show();
             finish();
         } else { // If it wasn't successful, display the error message
             Toast.makeText(this, result[0], Toast.LENGTH_SHORT).show();
