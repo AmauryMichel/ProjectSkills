@@ -8,19 +8,19 @@
         android:gravity="center"
 >
     <TextView
-            android:text="Welcome, please log in or register"
+            android:text="@string/welcomeLoggedOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
     />
     <Button
-            android:text="Login"
+            android:text="@string/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/login"
             android:onClick="toLogin"
     />
     <Button
-            android:text="Register"
+            android:text="@string/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/register"
