@@ -136,7 +136,7 @@ class db {
     $groupID = $this->conn->insert_id; // Get the ID of the newly created group
 
     // Add the user as a manager in that group
-    $stmtPlayerGroup = $this->conn-php>prepare("INSERT INTO player_group (player_id, group_id, is_manager) VALUES (?, ?, 1)");
+    $stmtPlayerGroup = $this->conn->prepare("INSERT INTO player_group (player_id, group_id, is_manager) VALUES (?, ?, 1)");
     $stmtPlayerGroup->bind_param("ii", $managerID, $groupID);
     $stmtPlayerGroup->execute();
     print("Success");
